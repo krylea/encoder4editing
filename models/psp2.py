@@ -24,19 +24,12 @@ class pSp(nn.Module):
         self.opts = opts
         # Define architecture
         self.encoder = self.set_encoder()
-        self.decoder = self.set_decoder()
+        self.decoder = load_network_pkl(self.opts.stylegan_weights)
         self.face_pool = torch.nn.AdaptiveAvgPool2d((256, 256))
         # Load weights if needed
         self.load_weights()
 
-    def set_decoder(self):
-        if self.opts.decoder_type == 'stylegan2':
-            decoder = Generator(self.opts.stylegan_size, 512, 8, channel_multiplier=2)
-        elif self.opts.decoder_type == 'stylegan-xl':
-            decoder = load_network_pkl(self.opts.stylegan_weights)
-        else:
-            raise Exception('{} is not a valid decoder'.format(self.opts.decoder_type))
-        return decoder
+
 
     def set_encoder(self):
         if self.opts.encoder_type == 'GradualStyleEncoder':
@@ -89,11 +82,7 @@ class pSp(nn.Module):
                 else:
                     codes[:, i] = 0
 
-        input_is_latent = not input_code
-        images, result_latent = self.decoder([codes],
-                                             input_is_latent=input_is_latent,
-                                             randomize_noise=randomize_noise,
-                                             return_latents=return_latents)
+        images, result_latent = self.decoder.synthesis(codes)
 
         if resize:
             images = self.face_pool(images)
@@ -109,12 +98,14 @@ class pSp(nn.Module):
         elif self.opts.start_from_latent_avg:
             # Compute mean code based on a large number of latents (10,000 here)
             with torch.no_grad():
-                if self.opts.decoder_type == 'stylegan2':
-                    self.latent_avg = self.decoder.mean_latent(10000).to(self.opts.device)
-                else:
-                    latent_in = torch.randn(10000, self.decoder.z_dim, device=self.opts.device)
-                    self.latent_avg = self.decoder.mapping(latent_in).mean(0, keepdim=True)
+                latent_in = torch.randn(10000, self.decoder.z_dim, device=self.opts.device)
+                self.latent_avg = self.decoder.mapping(latent_in).mean(0, keepdim=True)
         else:
             self.latent_avg = None
         if repeat is not None and self.latent_avg is not None:
             self.latent_avg = self.latent_avg.repeat(repeat, 1)
+
+
+
+
+
