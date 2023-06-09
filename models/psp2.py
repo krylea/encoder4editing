@@ -7,7 +7,7 @@ from models.encoders import psp_encoders
 from models.stylegan2.model import Generator
 from configs.paths_config import model_paths
 
-from styleganxl.networks_stylegan3_resetting import SuperresGenerator
+#from styleganxl.networks_stylegan3_resetting import SuperresGenerator
 from styleganxl.legacy import load_network_pkl
 
 def get_keys(d, name):
