@@ -9,6 +9,8 @@ from configs.paths_config import model_paths
 
 #from styleganxl.networks_stylegan3_resetting import SuperresGenerator
 from styleganxl.legacy import load_network_pkl
+from styleganxl.dnnlib.util import open_url
+
 
 def get_keys(d, name):
     if 'state_dict' in d:
@@ -24,12 +26,15 @@ class pSp(nn.Module):
         self.opts = opts
         # Define architecture
         self.encoder = self.set_encoder()
-        self.decoder = load_network_pkl(self.opts.stylegan_weights)
+        self.decoder = self.set_decoder()
         self.face_pool = torch.nn.AdaptiveAvgPool2d((256, 256))
         # Load weights if needed
         self.load_weights()
 
-
+    def set_decoder(self):
+        with open_url(self.opts.stylegan_weights) as f:
+            G = load_network_pkl(f)['G_ema']
+        return G
 
     def set_encoder(self):
         if self.opts.encoder_type == 'GradualStyleEncoder':
