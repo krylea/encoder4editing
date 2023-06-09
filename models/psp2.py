@@ -104,8 +104,8 @@ class pSp(nn.Module):
         elif self.opts.start_from_latent_avg:
             # Compute mean code based on a large number of latents (10,000 here)
             with torch.no_grad():
-                latent_in = torch.randn(10000, self.decoder.z_dim, device=self.opts.device)
-                self.latent_avg = self.decoder.mapping(latent_in, None).mean(0, keepdim=True)
+                latent_in = torch.randn(10000, self.decoder.z_dim, device=self.decoder.parameters()[0].device)
+                self.latent_avg = self.decoder.mapping(latent_in, None).mean(0, keepdim=True).to(self.opts.device)
         else:
             self.latent_avg = None
         if repeat is not None and self.latent_avg is not None:
