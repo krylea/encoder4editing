@@ -64,6 +64,24 @@ def load_network_pkl(f, force_fp16=False):
 class _TFNetworkStub(dnnlib.EasyDict):
     pass
 
+
+# Handle changed file structure
+
+import importlib
+import pkgutil
+
+def import_submodules(module):
+    """Import all submodules of a module, recursively."""
+    for loader, module_name, is_pkg in pkgutil.walk_packages(
+            module.__path__, module.__name__ + '.'):
+        importlib.import_module(module_name)
+
+import sys
+import inspect
+import models.styleganxl
+import_submodules(models.styleganxl)
+sgxl_module_names, sgxl_modules = zip(*inspect.getmembers(models.styleganxl, inspect.ismodule))
+
 class _LegacyUnpickler(pickle.Unpickler):
     def find_class(self, module, name):
         if module == 'dnnlib.tflib.network' and name == 'Network':
@@ -72,6 +90,8 @@ class _LegacyUnpickler(pickle.Unpickler):
             return lambda b: torch.load(io.BytesIO(b), map_location='cpu')
         if module == 'torch.storage' and name == '_load_from_bytes':
             return lambda b: torch.load(io.BytesIO(b), map_location='cpu')
+        if module in sgxl_module_names:
+            module = 'models.styleganxl.' + module
         return super().find_class(module, name)
 
 #----------------------------------------------------------------------------
