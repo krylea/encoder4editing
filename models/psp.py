@@ -1,6 +1,6 @@
-import matplotlib
+#import matplotlib
 
-matplotlib.use('Agg')
+#matplotlib.use('Agg')
 import torch
 from torch import nn
 from models.encoders import psp_encoders
@@ -118,3 +118,8 @@ class pSp(nn.Module):
             self.latent_avg = None
         if repeat is not None and self.latent_avg is not None:
             self.latent_avg = self.latent_avg.repeat(repeat, 1)
+
+
+
+
+

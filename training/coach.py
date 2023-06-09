@@ -1,9 +1,9 @@
 import os
 import random
-import matplotlib
+#import matplotlib
 import matplotlib.pyplot as plt
 
-matplotlib.use('Agg')
+#matplotlib.use('Agg')
 
 import torch
 from torch import nn, autograd
