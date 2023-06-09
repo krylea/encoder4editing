@@ -18,13 +18,13 @@ import numpy as np
 import scipy.signal
 import scipy.optimize
 import torch
-from models.styleganxl.torch_utils import misc
-from models.styleganxl.torch_utils import persistence
-from models.styleganxl.torch_utils.ops import conv2d_gradfix
-from models.styleganxl.torch_utils.ops import filtered_lrelu
-from models.styleganxl.torch_utils.ops import bias_act
-import models.styleganxl.dnnlib as dnnlib
-import models.styleganxl.legacy as legacy
+from torch_utils import misc
+from torch_utils import persistence
+from torch_utils.ops import conv2d_gradfix
+from torch_utils.ops import filtered_lrelu
+from torch_utils.ops import bias_act
+import dnnlib
+import legacy
 
 #----------------------------------------------------------------------------
 

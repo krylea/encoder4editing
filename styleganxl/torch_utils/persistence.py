@@ -20,7 +20,7 @@ import inspect
 import copy
 import uuid
 import types
-import models.styleganxl.dnnlib as dnnlib
+import dnnlib
 
 #----------------------------------------------------------------------------
 

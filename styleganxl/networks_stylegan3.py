@@ -16,11 +16,11 @@ import scipy.optimize
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from models.styleganxl.torch_utils import misc
-from models.styleganxl.torch_utils import persistence
-from models.styleganxl.torch_utils.ops import conv2d_gradfix
-from models.styleganxl.torch_utils.ops import filtered_lrelu
-from models.styleganxl.torch_utils.ops import bias_act
+from torch_utils import misc
+from torch_utils import persistence
+from torch_utils.ops import conv2d_gradfix
+from torch_utils.ops import filtered_lrelu
+from torch_utils.ops import bias_act
 #from models.styleganxl.pg_modules.blocks import CCBN1D
 
 #----------------------------------------------------------------------------
