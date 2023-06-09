@@ -108,8 +108,8 @@ class pSp(nn.Module):
                 self.latent_avg = self.decoder.mapping(latent_in, None).mean(0, keepdim=True).to(self.opts.device)
         else:
             self.latent_avg = None
-        if repeat is not None and self.latent_avg is not None:
-            self.latent_avg = self.latent_avg.repeat(repeat, 1)
+        #if repeat is not None and self.latent_avg is not None:
+            #self.latent_avg = self.latent_avg.repeat(repeat, 1)
 
 
 
