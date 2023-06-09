@@ -58,6 +58,7 @@ class pSp(nn.Module):
             print('Loading encoders weights from irse50!')
             encoder_ckpt = torch.load(model_paths['ir_se50'])
             self.encoder.load_state_dict(encoder_ckpt, strict=False)
+            ckpt=None
             if self.opts.decoder_type != 'stylegan-xl':
                 print('Loading decoder weights from pretrained!')
                 ckpt = torch.load(self.opts.stylegan_weights)
