@@ -12,7 +12,7 @@ import click
 import numpy as np
 import torch
 import torch.nn.functional as F
-import dnnlib
+import models.styleganxl.dnnlib as dnnlib
 
 
 # ----------------------------------------------------------------------------

@@ -15,7 +15,7 @@ import re
 import copy
 import numpy as np
 import torch
-import models.styleganxl.dnnlib
+import models.styleganxl.dnnlib as dnnlib
 from models.styleganxl.torch_utils import misc
 import io
 
