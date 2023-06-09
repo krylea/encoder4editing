@@ -99,7 +99,7 @@ class pSp(nn.Module):
             return images
         
     def __load_latent_avg(self, ckpt, repeat=None):
-        if 'latent_avg' in ckpt:
+        if ckpt is not None and 'latent_avg' in ckpt:
             self.latent_avg = ckpt['latent_avg'].to(self.opts.device)
         elif self.opts.start_from_latent_avg:
             # Compute mean code based on a large number of latents (10,000 here)
