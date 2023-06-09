@@ -78,6 +78,11 @@ class TrainOptions:
                                  help='Path to training checkpoint, works when --save_training_data was set to True')
         self.parser.add_argument('--update_param_list', nargs='+', type=str, default=None,
                                  help="Name of training parameters to update the loaded training checkpoint")
+        
+        # SGXL
+        self.parser.add_argument('--syn_layers', type=int, default=7, help="Number of layers for the SGXL stem")
+        self.parser.add_argument('--head_layers', type=int, default=4, help="Number of layers for the SGXL superres stages")
+        self.parser.add_argument('--stem_size', type=int, default=16, help="Resolution of the SGXL stem")
 
     def parse(self):
         opts = self.parser.parse_args()

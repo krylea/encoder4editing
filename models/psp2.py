@@ -40,7 +40,7 @@ class pSp(nn.Module):
         if self.opts.encoder_type == 'GradualStyleEncoder':
             encoder = psp_encoders.GradualStyleEncoder(50, 'ir_se', self.opts)
         elif self.opts.encoder_type == 'Encoder4Editing':
-            encoder = psp_encoders.Encoder4Editing(50, 'ir_se', self.opts)
+            encoder = psp_encoders.Encoder4EditingSGXL(50, 'ir_se', self.opts)
         elif self.opts.encoder_type == 'SingleStyleCodeEncoder':
             encoder = psp_encoders.BackboneEncoderUsingLastLayerIntoW(50, 'ir_se', self.opts)
         else:
