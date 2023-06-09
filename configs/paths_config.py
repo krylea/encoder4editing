@@ -1,7 +1,7 @@
 dataset_paths = {
 	#  Face Datasets (In the paper: FFHQ - train, CelebAHQ - test)
-	'ffhq': '/ssd003/projects/ffhq/images1024x1024',
-	'celeba_test': '',
+	'ffhq': '/ssd003/projects/ffhq/images1024x1024/',
+	'celeba_test': '/scratch/hdd001/datasets/celeb-a/celeb-a/img_align_celeba/',
 
 	#  Cars Dataset (In the paper: Stanford cars)
 	'cars_train': '',
