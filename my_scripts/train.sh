@@ -13,6 +13,8 @@ workers=4
 
 name=$1
 
+export CUDA_HOME="/pkgs/cuda-11.2"
+
 python scripts/train.py \
 --dataset_type ffhq_encode \
 --exp_dir exps/$name \
@@ -28,4 +30,8 @@ python scripts/train.py \
 --workers $workers \
 --batch_size $batch_size \
 --test_batch_size $batch_size \
---test_workers $workers 
+--test_workers $workers \
+--stem_size 16 \
+--syn_layers 10 \
+--head_layers 4 \
+--sgxl
