@@ -88,13 +88,13 @@ class pSpSGXL(nn.Module):
                 else:
                     codes[:, i] = 0
 
-        images, result_latent = self.decoder.synthesis(codes)
+        images = self.decoder.synthesis(codes)
 
         if resize:
             images = self.face_pool(images)
 
         if return_latents:
-            return images, result_latent
+            return images, codes
         else:
             return images
         
