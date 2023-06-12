@@ -17,6 +17,7 @@ from configs import data_configs
 from datasets.images_dataset import ImagesDataset
 from criteria.lpips.lpips import LPIPS
 from models.psp import pSp
+from models.psp2 import pSpSGXL
 from models.latent_codes_pool import LatentCodesPool
 from models.discriminator import LatentCodesDiscriminator
 from models.encoders.psp_encoders import ProgressiveStage
@@ -35,7 +36,10 @@ class Coach:
         self.device = 'cuda:0'
         self.opts.device = self.device
         # Initialize network
-        self.net = pSp(self.opts).to(self.device)
+        if opts.sgxl:
+            self.net = pSpSGXL(self.opts).to(self.device)
+        else:
+            self.net = pSp(self.opts).to(self.device)
 
         # Initialize loss
         if self.opts.lpips_lambda > 0:

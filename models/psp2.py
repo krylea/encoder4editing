@@ -19,10 +19,10 @@ def get_keys(d, name):
     return d_filt
 
 
-class pSp(nn.Module):
+class pSpSGXL(nn.Module):
 
     def __init__(self, opts):
-        super(pSp, self).__init__()
+        super().__init__()
         self.opts = opts
         # Define architecture
         self.encoder = self.set_encoder()

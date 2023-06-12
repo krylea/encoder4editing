@@ -83,6 +83,7 @@ class TrainOptions:
         self.parser.add_argument('--syn_layers', type=int, default=7, help="Number of layers for the SGXL stem")
         self.parser.add_argument('--head_layers', type=int, default=4, help="Number of layers for the SGXL superres stages")
         self.parser.add_argument('--stem_size', type=int, default=16, help="Resolution of the SGXL stem")
+        self.parser.add_argument('--sgxl', action='store_true', help="Whether to use SGXL")
 
     def parse(self):
         opts = self.parser.parse_args()

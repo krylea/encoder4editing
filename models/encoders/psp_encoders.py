@@ -264,8 +264,8 @@ class Encoder4EditingSGXL(Module):
 
         self.styles = nn.ModuleList()
         log_size = int(math.log(opts.stylegan_size // opts.stem_size, 2))
-        self.style_count = opts.syn_layers + (opts.head_layers - 2) * log_size 
-        self.coarse_ind = opts.syn_layers - 2
+        self.style_count = opts.syn_layers + (opts.head_layers - 2) * log_size
+        self.coarse_ind = opts.syn_layers
         self.middle_ind = self.coarse_ind + (opts.head_layers - 2) * log_size // 2
 
         for i in range(self.style_count):
