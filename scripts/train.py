@@ -24,6 +24,8 @@ def main():
 	else:
 		setup_progressive_steps(opts)
 		create_initial_experiment_dir(opts)
+		if opts.ckpt_path:
+			os.makedirs(os.path.dirname(opts.ckpt_path))
 
 	coach = Coach(opts, previous_train_ckpt)
 	coach.train()

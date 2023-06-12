@@ -25,7 +25,7 @@ python scripts/train.py \
 --id_lambda 0.5 \
 --val_interval 10000 \
 --max_steps 200000 \
---stylegan_size 512 \
+--stylegan_size 256 \
 --stylegan_weights ~/stylegan-xl/pretrained_models/ffhq256.pkl \
 --workers $workers \
 --batch_size $batch_size \
