@@ -19,7 +19,7 @@ from trainers.coach import Coach
 def main():
 	opts = TrainOptions().parse()
 	previous_train_ckpt = None
-	if opts.resume_training_from_ckpt:
+	if opts.ckpt_path and os.path.exists(opts.ckpt_path):
 		opts, previous_train_ckpt = load_train_checkpoint(opts)
 	else:
 		setup_progressive_steps(opts)
@@ -30,11 +30,11 @@ def main():
 
 
 def load_train_checkpoint(opts):
-	train_ckpt_path = opts.resume_training_from_ckpt
-	previous_train_ckpt = torch.load(opts.resume_training_from_ckpt, map_location='cpu')
+	train_ckpt_path = opts.ckpt_path
+	previous_train_ckpt = torch.load(opts.ckpt_path, map_location='cpu')
 	new_opts_dict = vars(opts)
 	opts = previous_train_ckpt['opts']
-	opts['resume_training_from_ckpt'] = train_ckpt_path
+	opts['ckpt_path'] = train_ckpt_path
 	update_new_configs(opts, new_opts_dict)
 	pprint.pprint(opts)
 	opts = Namespace(**opts)

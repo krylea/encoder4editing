@@ -31,6 +31,7 @@ python scripts/train.py \
 --batch_size $batch_size \
 --test_batch_size $batch_size \
 --test_workers $workers \
+--ckpt_path /checkpoint/kaselby/$name/ckpt.pt \
 --stem_size 16 \
 --syn_layers 10 \
 --head_layers 4 \

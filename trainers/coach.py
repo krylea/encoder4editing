@@ -427,8 +427,8 @@ class Coach:
             return loss_dict
 
     def sample_real_and_fake_latents(self, x):
-        sample_z = torch.randn(self.opts.batch_size, 512, device=self.device)
-        real_w = self.net.decoder.get_latent(sample_z)
+        sample_z = torch.randn(self.opts.batch_size, self.net.decoder.z_dim, device=self.device)
+        real_w = self.net.decoder.mapping(sample_z, None)
         fake_w = self.net.encoder(x)
         if self.opts.start_from_latent_avg:
             fake_w = fake_w + self.net.latent_avg.repeat(fake_w.shape[0], 1, 1)
