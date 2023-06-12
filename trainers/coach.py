@@ -21,7 +21,7 @@ from models.psp2 import pSpSGXL
 from models.latent_codes_pool import LatentCodesPool
 from models.discriminator import LatentCodesDiscriminator
 from models.encoders.psp_encoders import ProgressiveStage
-from training.ranger import Ranger
+from trainers.ranger import Ranger
 
 random.seed(0)
 torch.manual_seed(0)
