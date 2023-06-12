@@ -190,9 +190,13 @@ class Coach:
         return loss_dict
 
     def checkpoint_me(self, loss_dict, is_best):
-        save_name = 'best_model.pt' if is_best else 'iteration_{}.pt'.format(self.global_step)
+        if is_best:
+            checkpoint_path = os.path.join(self.checkpoint_dir, 'best_model.pt')
+        else:
+            checkpoint_path = self.opts.ckpt_path
+        #save_name = 'best_model.pt' if is_best else 'iteration_{}.pt'.format(self.global_step)
         save_dict = self.__get_save_dict()
-        checkpoint_path = os.path.join(self.checkpoint_dir, save_name)
+        #checkpoint_path = os.path.join(self.checkpoint_dir, save_name)
         torch.save(save_dict, checkpoint_path)
         with open(os.path.join(self.checkpoint_dir, 'timestamp.txt'), 'a') as f:
             if is_best:

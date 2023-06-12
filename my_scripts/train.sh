@@ -32,6 +32,7 @@ python scripts/train.py \
 --test_batch_size $batch_size \
 --test_workers $workers \
 --ckpt_path /checkpoint/kaselby/$name/ckpt.pt \
+--save_training_data \
 --stem_size 16 \
 --syn_layers 10 \
 --head_layers 4 \

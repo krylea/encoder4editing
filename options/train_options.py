@@ -74,7 +74,7 @@ class TrainOptions:
         self.parser.add_argument('--sub_exp_dir', default=None, type=str, help='Name of sub experiment directory')
         self.parser.add_argument('--keep_optimizer', action='store_true',
                                  help='Whether to continue from the checkpoint\'s optimizer')
-        self.parser.add_argument('--resume_training_from_ckpt', default=None, type=str,
+        self.parser.add_argument('--ckpt_path', default=None, type=str,
                                  help='Path to training checkpoint, works when --save_training_data was set to True')
         self.parser.add_argument('--update_param_list', nargs='+', type=str, default=None,
                                  help="Name of training parameters to update the loaded training checkpoint")
