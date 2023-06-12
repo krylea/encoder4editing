@@ -13,7 +13,7 @@ sys.path.append(".")
 sys.path.append("..")
 
 from options.train_options import TrainOptions
-from train.coach import Coach
+from trainers.coach import Coach
 
 
 def main():
