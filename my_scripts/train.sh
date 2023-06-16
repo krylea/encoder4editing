@@ -24,6 +24,7 @@ python scripts/train.py \
 --progressive_start 20000 \
 --id_lambda 0.5 \
 --val_interval 10000 \
+--save_interval 500 \
 --max_steps 200000 \
 --stylegan_size 256 \
 --stylegan_weights ~/stylegan-xl/pretrained_models/ffhq256.pkl \

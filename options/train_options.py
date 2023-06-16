@@ -38,7 +38,7 @@ class TrainOptions:
         self.parser.add_argument('--checkpoint_path', default=None, type=str, help='Path to pSp model checkpoint')
 
         self.parser.add_argument('--max_steps', default=500000, type=int, help='Maximum number of training steps')
-        self.parser.add_argument('--image_interval', default=100, type=int,
+        self.parser.add_argument('--image_interval', default=1000, type=int,
                                  help='Interval for logging train images during training')
         self.parser.add_argument('--board_interval', default=50, type=int,
                                  help='Interval for logging metrics to tensorboard')
