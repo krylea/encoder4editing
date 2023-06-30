@@ -60,10 +60,10 @@ class pSp(nn.Module):
             print('Loading encoders weights from irse50!')
             encoder_ckpt = torch.load(model_paths['ir_se50'])
             self.encoder.load_state_dict(encoder_ckpt, strict=False)
-            if self.opts.decoder_type != 'stylegan-xl':
-                print('Loading decoder weights from pretrained!')
-                ckpt = torch.load(self.opts.stylegan_weights)
-                self.decoder.load_state_dict(ckpt['g_ema'], strict=False)
+            #if self.opts.decoder_type != 'stylegan-xl':
+            print('Loading decoder weights from pretrained!')
+            ckpt = torch.load(self.opts.stylegan_weights)
+            self.decoder.load_state_dict(ckpt['g_ema'], strict=False)
             self.__load_latent_avg(ckpt, repeat=self.encoder.style_count)
 
     def forward(self, x, resize=True, latent_mask=None, input_code=False, randomize_noise=True,
@@ -109,11 +109,11 @@ class pSp(nn.Module):
         elif self.opts.start_from_latent_avg:
             # Compute mean code based on a large number of latents (10,000 here)
             with torch.no_grad():
-                if self.opts.decoder_type == 'stylegan2':
-                    self.latent_avg = self.decoder.mean_latent(10000).to(self.opts.device)
-                else:
-                    latent_in = torch.randn(10000, self.decoder.z_dim, device=self.opts.device)
-                    self.latent_avg = self.decoder.mapping(latent_in).mean(0, keepdim=True)
+                #if self.opts.decoder_type == 'stylegan2':
+                self.latent_avg = self.decoder.mean_latent(10000).to(self.opts.device)
+                #else:
+                #    latent_in = torch.randn(10000, self.decoder.z_dim, device=self.opts.device)
+                #    self.latent_avg = self.decoder.mapping(latent_in).mean(0, keepdim=True)
         else:
             self.latent_avg = None
         if repeat is not None and self.latent_avg is not None:
