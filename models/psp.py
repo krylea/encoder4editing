@@ -67,11 +67,12 @@ class pSp(nn.Module):
             self.__load_latent_avg(ckpt, repeat=self.encoder.style_count)
 
     def forward(self, x, resize=True, latent_mask=None, input_code=False, randomize_noise=True,
-                inject_latent=None, return_latents=False, alpha=None):
+                inject_latent=None, return_latents=False, alpha=None, truncation=1.):
         if input_code:
             codes = x
         else:
-            codes = self.encoder(x)
+            codes = self.encoder(x) * truncation
+
             # normalize with respect to the center of an average face
             if self.opts.start_from_latent_avg:
                 if codes.ndim == 2:
